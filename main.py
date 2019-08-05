@@ -75,8 +75,6 @@ def run_pipeline():
     mesh_ops.output_obj_with_faces(mesh, 'refined.obj')
 
     sio.savemat('testdata/testmesh.mat', mdict={'mesh': mesh})
-    # Launch Meshlab
-    os.system('/Applications/meshlab.app/Contents/MacOS/meshlab refined.obj &')
 
 
 if __name__ == '__main__':
