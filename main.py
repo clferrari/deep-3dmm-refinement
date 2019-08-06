@@ -15,6 +15,9 @@ import shlex
 
 def run_pipeline():
     print('Running...')
+    if not os.path.exists('results/'):
+        os.makedirs('results/')
+
     parser = argparse.ArgumentParser(description='Fit 3DMM to a face image and refines the mesh using GAN')
     parser.add_argument('--use_camera', dest='use_camera', help='Use camera to grab frame', action='store_true')
     parser.add_argument('--im_path', dest='im_path', help='Path to test image', default='g2.png', type=str)
@@ -23,7 +26,8 @@ def run_pipeline():
 
     # Instantiate Landmark Detector
     lmdetector = LMDetector()
-
+    print('Detecting Landmarks')
+    
     if use_camera:
         cap = cv2.VideoCapture(0)
         while True:
@@ -43,38 +47,39 @@ def run_pipeline():
         im = io.imread(im_path)
         print('Reading image', im_path)
         if im.shape[2] > 3:
-            im = im[..., :3]
+            im = im[..., :3]        
         lms, img = lmdetector.get3DLandmarks_file(im)
 
-    print('Detecting Landmarks')
+    
+    print('Close image to continue...')
     plt.imshow(img)
     plt.plot(lms[:, 0], lms[:, 1], 'ro')
     plt.show()
-
+    
     # Fit 3DMM
     result = Fitting.fit_3dmm(lms)
     defShape = result['defShape']
-    sio.savemat('testdata/defShape.mat', mdict={'mesh': defShape})
+    sio.savemat('results/defShape.mat', mdict={'mesh': defShape})
     # Generate Coarse Image
     img = Image_generation.generate_3channel(result, True)
     img = np.fliplr(img)
     # Save coarse 3-channel image
-    scipy.misc.imsave('coarse.png', img)
+    scipy.misc.imsave('results/coarse.png', img)
 
     # Save coarse 3D mesh
     mesh_coarse = mesh_ops.mesh_from_depth(img, 1)
-    mesh_ops.output_obj_with_faces(mesh_coarse, 'coarse.obj')
+    mesh_ops.output_obj_with_faces(mesh_coarse, 'results/coarse.obj')
 
     # Start Refinement
     generator = Generator()
     refined = generator.refine(img)
     # Save Refined Image
-    scipy.misc.imsave('refined.png', refined)
+    scipy.misc.imsave('results/refined.png', refined)
     # Output refined mesh
     mesh = mesh_ops.mesh_from_depth(refined, 1)
-    mesh_ops.output_obj_with_faces(mesh, 'refined.obj')
+    mesh_ops.output_obj_with_faces(mesh, 'results/refined.obj')
 
-    sio.savemat('testdata/testmesh.mat', mdict={'mesh': mesh})
+    sio.savemat('results/testmesh.mat', mdict={'mesh': mesh})
 
 
 if __name__ == '__main__':
