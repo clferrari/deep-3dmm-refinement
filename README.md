@@ -22,11 +22,30 @@ The *data3dmm* foler must be unzipped in the root folder; the *.pb* file must be
 
 ## Usage
 
-In the root folder, the demo script can be run with the following: `python main.py <--im_path path/to/image> <--use_camera>`
+The script can be run with the following: `python main.py < --im_path path/to/image > < --use_camera >`
 
-If `--im_path` is not specified, the default image is used. Test images must be placed into *testdata* folder. If a webcam is available, `--use_camera` can be used to capture a live frame.
+If `--im_path` is not specified, the default image is used. Test images must be placed into *testdata* folder. 
+
+If a webcam is available, `--use_camera` can be used to capture a live frame.
+
+## Citation
+
+If you find this work useful, please cite `@article{galteri2019deep,
+  title={Deep 3D morphable model refinement via progressive growing of conditional Generative Adversarial Networks},
+  author={Galteri, Leonardo and Ferrari, Claudio and Lisanti, Giuseppe and Berretti, Stefano and Del Bimbo, Alberto},
+  journal={Computer Vision and Image Understanding},
+  volume={185},
+  pages={31--42},
+  year={2019},
+  publisher={Elsevier}
+}`
 
 ## References
 
 [1] Galteri, Leonardo, et al. "Deep 3D morphable model refinement via progressive growing of conditional Generative Adversarial Networks." Computer Vision and Image Understanding 185 (2019): 31-42.
+
 [2] Ferrari, Claudio, et al. "A dictionary learning-based 3D morphable shape model." IEEE Transactions on Multimedia 19.12 (2017): 2666-2679.
+
+## Contacts
+
+For any further question, please write to _leonardo.galteri@unifi.it_ or _claudio.ferrari@unifi.it_
