@@ -40,6 +40,17 @@ If you find this work useful, please cite
   pages={31--42},
   year={2019},
   publisher={Elsevier}
+  
+  @article{ferrari2017dictionary,
+  title={A dictionary learning-based 3D morphable shape model},
+  author={Ferrari, Claudio and Lisanti, Giuseppe and Berretti, Stefano and Del Bimbo, Alberto},
+  journal={IEEE Transactions on Multimedia},
+  volume={19},
+  number={12},
+  pages={2666--2679},
+  year={2017},
+  publisher={IEEE}
+}
 }
 ```
 
