@@ -2,6 +2,6 @@ cmake
 dlib
 face-alignment
 opencv-python
-scipy==1.1.0
+scipy==1.10.0
 scikit-image
 tensorflow
